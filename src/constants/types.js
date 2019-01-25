@@ -1,1 +1,3 @@
 export const SEARCH_QUERY = 'SEARCH_QUERY';
+export const QUERY_RESOLVED = 'QUERY_RESOLVED';
+export const QUERY_REJECTED = 'QUERY_REJECTED';
