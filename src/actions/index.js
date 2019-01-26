@@ -15,11 +15,13 @@ const queryRejection = err => ({
   err
 });
 
-export const makeSearch = query => (dispatch, getState) => {
-  //set state to what you searched for
-  dispatch(searchQueryUnsafe(query));
+export const buildQuery = query => (dispatch, getState) => {
+  dispatch(searchQueryUnsafe(query))
+}
+
+export const makeSearch = () => (dispatch, getState) => {
   //send the fetch request to the google api
-  fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=5`)
+  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=5`)
   .then(res => res.json())
   .then(json => {
     //if the request is resolved, set state to the json response
