@@ -25,7 +25,18 @@ export const makeSearch = () => (dispatch, getState) => {
   .then(res => res.json())
   .then(json => {
     //if the request is resolved, set state to the json response
-    dispatch(queryResolution(json));
+    const { items } = json;
+    const cleanData = items.map(({ volumeInfo }) => {
+      let el = {};
+      let { authors, title, publisher, imageLinks, infoLink } = volumeInfo;
+      el['title'] = title;
+      el['authors'] = authors;
+      el['publisher'] = publisher;
+      el['image'] = imageLinks.thumbnail;
+      el['info'] = infoLink
+      return el;
+    })
+    dispatch(queryResolution(cleanData));
   })
   .catch(err => {
     console.log(err);
