@@ -6,12 +6,15 @@ import Search from '../components/Search';
 
 const App = ({ makeSearch, buildQuery }) => (
   <div className="App">
-    <Search makeSearch={makeSearch} buildQuery={buildQuery} />
+    <Search 
+      makeSearch={makeSearch}
+      buildQuery={buildQuery}
+    />
   </div>
 );
 
 const mapStateToProps = (state) => ({
-  searchQuery: state.searchQuery
+  searchQuery: state.search.searchQuery
 })
 
 App.propTypes = {
