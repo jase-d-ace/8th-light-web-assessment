@@ -30,5 +30,5 @@ export const search = (state = initialState, action) => {
       }
     default:
       return state
-  };
-};
+  }
+}
