@@ -15,14 +15,14 @@ body {
   align-content: center;
 }
 
+.search-container h2 {
+  align-self: center;
+}
+
 .search-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.search-header h3 {
-  display: inline;
 }
 
 .input-bar {
