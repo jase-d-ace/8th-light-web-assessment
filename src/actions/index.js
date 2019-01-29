@@ -7,9 +7,10 @@ const searchQueryUnsafe = query => ({
   query
 });
 
-const queryResolution = query => ({
+const queryResolution = (query, prev) => ({
   type: types.QUERY_RESOLVED,
-  query
+  query,
+  prev
 });
 
 const queryRejection = err => ({
@@ -57,7 +58,7 @@ export const makeSearch = () => (dispatch, getState) => {
       return el;
     });
     //dispatch the query resolution action with the filtered array of objects
-    dispatch(queryResolution(cleanData));
+    dispatch(queryResolution(cleanData, getState().search.searchQuery));
   })
   .catch(err => {
     console.log(err);

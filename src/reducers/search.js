@@ -7,7 +7,8 @@ const initialState = {
   searchQuery: null,
   queryResult: null,
   promiseResolved: false,
-  err: null
+  err: null,
+  previousQuery: null
 };
 
 export const search = (state = initialState, action) => {
@@ -21,7 +22,9 @@ export const search = (state = initialState, action) => {
       return {
         ...state,
         queryResult: action.query,
-        promiseResolved: true
+        promiseResolved: true,
+        previousQuery: action.prev,
+        searchQuery: null
       }
     case QUERY_REJECTED:
       return {
