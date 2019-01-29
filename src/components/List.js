@@ -7,6 +7,6 @@ const List = ({ queryResult }) => {
     <ol className="book-list">
       {nodes}
     </ol>
-  )
-}
+  );
+};
 export default List;
