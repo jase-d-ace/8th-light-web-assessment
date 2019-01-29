@@ -13,13 +13,9 @@ const App = ({ makeSearch, buildQuery }) => (
   </div>
 );
 
-const mapStateToProps = (state) => ({
-  searchQuery: state.search.searchQuery
-})
-
 App.propTypes = {
   makeSearch: PropTypes.func,
   buildQuery: PropTypes.func
 }
 
-export default connect(mapStateToProps, { makeSearch, buildQuery })(App);
+export default connect(null, { makeSearch, buildQuery })(App);
