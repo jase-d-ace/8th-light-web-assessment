@@ -1,22 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { makeSearch, buildQuery } from '../actions';
 import services from '../services/services';
 import PropTypes from 'prop-types';
 import List from './List';
 
-/*TODO:
- * Decide whether I want to keep the search bar onscreen at all times or render that conditionally as well.
-*/
-
-const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, searchQuery }) => (
+const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, searchQuery, previousQuery }) => (
   <div className="search-container">
-    <div className="search-header">
-      {promiseResolved ? (<h2>You searched for {searchQuery}</h2>) : (<h2>Make a Search</h2>)}
+    {promiseResolved ? (<h2>You searched for {previousQuery}</h2>) : (<h2>Please Make a Search</h2>)}
+    <form onSubmit={(e) => services.submit(e, makeSearch)} className="search-header">
       <input className="input-bar" type="text" onChange={(e) => services.inputChange(e.target.value, buildQuery)} />
-      <button onClick={(e) => services.submit(e, makeSearch)}>Click Me</button>
-    </div>
+      <input type="submit" value="Click Me" />
+    </form>
     <div className="results-container">
-    {promiseResolved && !err ? <List queryResult={queryResult} /> : err ? <h1>Something went wrong!</h1> : ''}
+    {queryResult && !err ? <List queryResult={queryResult} /> : err ? <h1>Something went wrong!</h1> : ''}
     </div>
   </div>
 );
@@ -25,7 +22,8 @@ const mapStateToProps = (state) => ({
   searchQuery: state.search.searchQuery,
   queryResult: state.search.queryResult,
   promiseResolved: state.search.promiseResolved,
-  err: state.search.err
+  err: state.search.err,
+  previousQuery: state.search.previousQuery
 })
 
 Search.propTypes = {
@@ -43,4 +41,4 @@ Search.propTypes = {
   }))
 }
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps, { makeSearch, buildQuery })(Search)
