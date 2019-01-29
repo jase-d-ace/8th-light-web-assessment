@@ -1,12 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ListItem = ({title, etag, authors, image, info, publisher}) => (
-  <li key={etag}>
-    <span>{title}, by {authors[0]}</span> 
-    <img src={image} alt="book" />
-    <p>Publisher: {publisher}</p>
+const ListItem = ({title, etag, authors, image, info, publisher}) => {
+
+  const authorCheck = authors.length > 1 ? (authors.map(author => <span>{author}, </span>)) : (<span>{authors[0]}</span>)
+
+  return(
+    <li key={etag}>
+      <span>{title}, by {authorCheck}</span> 
+      <img src={image} alt="book" />
+      <p>Publisher: {publisher}</p>
       <p>More Info: <a href={info}>Click Here</a></p>
-  </li>
-);
+    </li>
+  )
+}
 
-export default ListItem
+
+ListItem.propTypes = {
+  etag: PropTypes.string.isRequired,
+  authors: PropTypes.arrayOf(PropTypes.string),
+  image: PropTypes.string,
+  publisher: PropTypes.string,
+  title: PropTypes.string,
+  info: PropTypes.string
+}
+
+export default ListItem;
