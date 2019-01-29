@@ -6,9 +6,9 @@ const ListItem = ({title, etag, authors, image, info, publisher}) => {
   const authorCheck = authors.length > 1 ? (authors.map(author => <span>{author}, </span>)) : (<span>{authors[0]}</span>)
 
   return(
-    <li key={etag}>
-      <span>{title}, by {authorCheck}</span> 
+    <li className="book-item" key={etag}>
       <img src={image} alt="book" />
+      <p>{title}, by {authorCheck}</p> 
       <p>Publisher: {publisher}</p>
       <p>More Info: <a href={info}>Click Here</a></p>
     </li>

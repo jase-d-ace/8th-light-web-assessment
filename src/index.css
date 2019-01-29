@@ -6,9 +6,53 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #DEDEDE;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.search-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-header h3 {
+  display: inline;
+}
+
+.input-bar {
+  height: 20px;
+  margin: 1%;
+  width: 25%;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.book-list {
+  display: flex;
+  height: 100%;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-item {
+  margin: 3%;
+  background-color: #757C9180;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
 }
