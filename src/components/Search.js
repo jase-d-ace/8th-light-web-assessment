@@ -47,7 +47,8 @@ Search.propTypes = {
     publisher: PropTypes.string,
     title: PropTypes.string,
     info: PropTypes.string
-  }))
+  })),
+  previousQuery: PropTypes.string
 }
 
 export default connect(mapStateToProps, { makeSearch, buildQuery })(Search)

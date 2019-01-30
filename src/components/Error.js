@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /*
  * Obviously this component is kind of a joke.
@@ -15,5 +16,12 @@ const Error = ({ err }) => (
     <h2>Maybe try your search again or try a different search?</h2>
   </div>
 );
+
+Error.propTypes = {
+  err: PropTypes.shape({
+    message: PropTypes.string,
+    stack: PropTypes.string
+  })
+}
 
 export default Error;
