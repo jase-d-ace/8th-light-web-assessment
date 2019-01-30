@@ -4,6 +4,7 @@ import { makeSearch, buildQuery } from '../actions';
 import services from '../services/services';
 import PropTypes from 'prop-types';
 import List from './List';
+import Error from './Error';
 
 const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, searchQuery, previousQuery }) => (
   <div className="search-container">
@@ -13,7 +14,7 @@ const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, sea
       <input type="submit" value="Click Me" />
     </form>
     <div className="results-container">
-    {queryResult && !err ? <List queryResult={queryResult} /> : err ? <h1>Something went wrong!</h1> : ''}
+      {queryResult && !err ? <List queryResult={queryResult} /> : err ? <Error err={err} /> : ''}
     </div>
   </div>
 );

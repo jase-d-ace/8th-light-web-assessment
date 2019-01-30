@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ListItem = ({title, etag, authors, image, info, publisher}) => {
 
-  const authorCheck = authors.length > 1 ? (authors.map(author => <span>{author}, </span>)) : (<span>{authors[0]}</span>)
+  const authorCheck = authors ? authors.length > 1 ? (authors.map(author => <span>{author}, </span>)) : (<span>{authors[0]}</span>) : (<span>Author Unavailable</span>)
 
   return(
     <li className="book-item" key={etag}>
