@@ -56,3 +56,9 @@ body {
   align-items: center;
   width: 50%;
 }
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
