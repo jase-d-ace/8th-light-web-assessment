@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import List from './List';
 import Error from './Error';
 
-const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, searchQuery, previousQuery }) => (
+const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, previousQuery }) => (
   <div className="search-container">
     {promiseResolved ? (<h2>You searched for {previousQuery}</h2>) : (<h2>Please Make a Search</h2>)}
     <form onSubmit={(e) => services.submit(e, makeSearch)} className="search-header">
@@ -14,13 +14,12 @@ const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, sea
       <input type="submit" value="Click Me" />
     </form>
     <div className="results-container">
-      {queryResult && !err ? <List queryResult={queryResult} /> : err ? <Error err={err} /> : ''}
+      {promiseResolved && !err ? <List queryResult={queryResult} /> : err ? <Error err={err} /> : ''}
     </div>
   </div>
 );
 
 const mapStateToProps = (state) => ({
-  searchQuery: state.search.searchQuery,
   queryResult: state.search.queryResult,
   promiseResolved: state.search.promiseResolved,
   err: state.search.err,
