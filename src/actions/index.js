@@ -13,9 +13,10 @@ const queryResolution = (query, prev) => ({
   prev
 });
 
-const queryRejection = err => ({
+const queryRejection = (err, prev) => ({
   type: types.QUERY_REJECTED,
-  err
+  err,
+  prev
 });
 
 /* Dispatchers and Business Logic */
@@ -62,6 +63,6 @@ export const makeSearch = () => (dispatch, getState) => {
   })
   .catch(err => {
     //if the request is rejected, set state to the error
-    dispatch(queryRejection(new Error(err || 'something no good')));
+    dispatch(queryRejection(new Error(err || 'something no good'), getState().search.searchQuery));
   });
 };
