@@ -1,68 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 8th Light Code Assessment
 
-## Available Scripts
+This is my submission for the 8th Light Technical Code Assessment. 
 
-In the project directory, you can run:
+## The Challenge
+Build an app that consumes the Google Books API and returns the following information: 
 
-### `npm start`
+1. The title, author, and publisher of the book
+2. A picture of the cover
+3. A link that navigates to a site with more information about the book
+4. Deploy it somewhere on the internet
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## My Solution
+I used JavaScript as my language of choice for this challenge. Initially, I thought I'd need to protect my API requests with a key, but it turns out I didn't need to. That said, I elected to use React.js as my library of choice for this challenge. Additionally, since the challenge also required that I decouple and modularize my code as much as possible, I elected to use Redux.js as my store container so that my components didn't need to rely on each other for information. That said, it may have been a little overkill to add it, since the complexity of the app probably didn't warrant all of the setup that Redux requires. 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Basically, my thought process was to first do as much set up as possible at first; my goal was to ensure that all of the business logic checked out, and all of my actions, dispatchers, and reducers were good to go. I wanted to make sure that all of the heavy Redux work was done FIRST, and then I'd worry about presentational components. So I focused mainly on writing clean, modular Redux code for my dispatchers and reducers.
 
-### `npm test`
+It was a really nice surprise that the Google Books API didn't require an API key, which allowed me to write strictly front end code without the use of a server. This allowed me to deploy using [surge.sh](https://surge.sh) for faster deployment with less setup.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Next Steps
 
-### `npm run build`
+While I did do SOME styling for the app, I feel like I can do more. I also think that even though the app does exactly as the challenge requires, I think I can expand on it a little more. I wasn't sure how many books I should be returning from the API, so I picked a nice, round 10.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+I also think there's some way of programmatically dealing with books with multiple authors that doesn't involve using a `for loop` and brute-forcing the formatting of multiple authors.
