@@ -61,8 +61,7 @@ export const makeSearch = () => (dispatch, getState) => {
     dispatch(queryResolution(cleanData, getState().search.searchQuery));
   })
   .catch(err => {
-    console.log(err);
     //if the request is rejected, set state to the error
-    dispatch(queryRejection(err));
+    dispatch(queryRejection(new Error(err || 'something no good')));
   });
 };
