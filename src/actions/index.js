@@ -37,7 +37,7 @@ export const buildQuery = query => (dispatch, getState) => {
 
 export const makeSearch = () => (dispatch, getState) => {
   //send the fetch request to the google api
-  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=5`)
+  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=10`)
   .then(res => res.json())
   .then(json => {
     //destructure the response to strip away the unnecessary stuff and focus on the actual search results
