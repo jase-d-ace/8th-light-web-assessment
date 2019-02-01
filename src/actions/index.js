@@ -1,4 +1,5 @@
 import * as types from '../constants/types';
+import _ from 'underscore';
 
 /* Actions and Payloads */
 
@@ -26,8 +27,12 @@ const queryRejection = (err, prev) => ({
  * Once the user sets the state with buildQuery, they can then use makeSearch to make a fetch request based on the state
 */
 
-export const buildQuery = query => (dispatch, getState) => {
+export const debouncedBuildQuery = _.debounce((query, dispatch) => {
   dispatch(searchQueryUnsafe(query))
+}, 500)
+
+export const buildQuery = query => (dispatch, getState) => {
+  debouncedBuildQuery(query, dispatch)
 }
 
 /*
@@ -40,9 +45,7 @@ export const makeSearch = () => (dispatch, getState) => {
   //send the fetch request to the google api
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=10`)
   .then(res => res.json())
-  .then(json => {
-    //destructure the response to strip away the unnecessary stuff and focus on the actual search results
-    const { items } = json;
+  .then(({ items }) => {
     //take the array of results and start stripping away more unecessary data
     const cleanData = items.map(({ volumeInfo, etag }) => {
       //holder object to keep relevant information
