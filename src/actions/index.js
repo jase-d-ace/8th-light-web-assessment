@@ -31,7 +31,7 @@ const queryRejection = (err, prev) => ({
 
 export const debouncedBuildQuery = _.debounce((query, dispatch) => {
   dispatch(searchQueryUnsafe(query))
-}, 500)
+}, 200)
 
 export const buildQuery = query => (dispatch, getState) => {
   debouncedBuildQuery(query, dispatch)
