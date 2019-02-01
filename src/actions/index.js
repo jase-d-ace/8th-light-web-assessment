@@ -25,6 +25,8 @@ const queryRejection = (err, prev) => ({
 /*
  * This dispatcher will be called as an onChange function, setting the state to whatever the user types on the front end
  * Once the user sets the state with buildQuery, they can then use makeSearch to make a fetch request based on the state
+ * Update 02/01/2019: Added a debouncer so that state doesn't update with every keystroke.
+ * Debounce solution can be found here: https://stackoverflow.com/questions/50493683/debounce-method-inside-redux-thunk
 */
 
 export const debouncedBuildQuery = _.debounce((query, dispatch) => {
