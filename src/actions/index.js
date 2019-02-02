@@ -29,9 +29,9 @@ const queryRejection = (err, prev) => ({
  * Debounce solution can be found here: https://stackoverflow.com/questions/50493683/debounce-method-inside-redux-thunk
 */
 
-export const debouncedBuildQuery = _.debounce((query, dispatch) => {
+const debouncedBuildQuery = _.debounce((query, dispatch) => {
   dispatch(searchQueryUnsafe(query))
-}, 200)
+}, 100)
 
 export const buildQuery = query => (dispatch, getState) => {
   debouncedBuildQuery(query, dispatch)
@@ -49,8 +49,8 @@ export const makeSearch = () => (dispatch, getState) => {
   .then(res => res.json())
   .then(({ items }) => {
     //take the array of results and start stripping away more unecessary data
-    const cleanData = items.map(({ volumeInfo, etag }) => {
-      //holder object to keep relevant information
+     const cleanData = items.map(({ volumeInfo, etag }) => {
+      // holder object to keep relevant information
       let el = {};
       //destructure each item to take out more irrelevant information
       let { authors, title, publisher, imageLinks, infoLink } = volumeInfo;
