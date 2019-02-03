@@ -49,10 +49,8 @@ export const makeSearch = () => (dispatch, getState) => {
   .then(res => res.json())
   .then(({ items }) => {
     const cleanData = items.map(({ volumeInfo, etag }) => {
-      const { imageLinks } = volumeInfo
-      const image = _.pick(imageLinks, 'thumbnail');
-      const mainInfo = _.pick(volumeInfo, 'title', 'authors', 'publisher', 'infoLink')
-      return { ...image, ...mainInfo, etag }
+      const { title, authors, publisher, infoLink, imageLinks: { thumbnail } } = volumeInfo;
+      return { title, authors, publisher, infoLink, thumbnail, etag }
     });
     //dispatch the query resolution action with the filtered array of objects
     dispatch(queryResolution(cleanData, getState().search.searchQuery));
