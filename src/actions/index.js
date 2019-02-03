@@ -48,20 +48,11 @@ export const makeSearch = () => (dispatch, getState) => {
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=10`)
   .then(res => res.json())
   .then(({ items }) => {
-    //take the array of results and start stripping away more unecessary data
-     const cleanData = items.map(({ volumeInfo, etag }) => {
-      // holder object to keep relevant information
-      let el = {};
-      //destructure each item to take out more irrelevant information
-      let { authors, title, publisher, imageLinks, infoLink } = volumeInfo;
-      //populate holder object with relevant information
-      el['title'] = title;
-      el['authors'] = authors;
-      el['publisher'] = publisher;
-      el['image'] = imageLinks.thumbnail;
-      el['info'] = infoLink
-      el['etag'] = etag
-      return el;
+    const cleanData = items.map(({ volumeInfo, etag }) => {
+      const { imageLinks } = volumeInfo
+      const image = _.pick(imageLinks, 'thumbnail');
+      const mainInfo = _.pick(volumeInfo, 'title', 'authors', 'publisher', 'infoLink')
+      return { ...image, ...mainInfo, etag }
     });
     //dispatch the query resolution action with the filtered array of objects
     dispatch(queryResolution(cleanData, getState().search.searchQuery));
