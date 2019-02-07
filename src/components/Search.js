@@ -20,7 +20,7 @@ const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, pre
     {previousQuery ? (<h2>You searched for {previousQuery}</h2>) : (<h2>Please Make a Search</h2>)}
     <form onSubmit={(e) => services.submit(e, makeSearch)} className="search-header">
       <input className="input-bar" type="text" onChange={(e) => services.inputChange(e.target.value, buildQuery)} />
-      <input type="submit" value="Click Me" />
+      <input type="submit" value="Search" />
     </form>
     <div className="results-container">
       {promiseResolved && !err ? <List queryResult={queryResult} /> : err ? <Error err={err} /> : ''}
@@ -41,7 +41,7 @@ Search.propTypes = {
   promiseResolved: PropTypes.bool,
   err: PropTypes.object,
   queryResult: PropTypes.arrayOf(PropTypes.shape({
-    etag: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     authors: PropTypes.arrayOf(PropTypes.string),
     image: PropTypes.string,
     publisher: PropTypes.string,

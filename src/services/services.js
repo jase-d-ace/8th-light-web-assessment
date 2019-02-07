@@ -5,6 +5,7 @@ class Services {
   submit(e, callback) {
     e.preventDefault();
     callback();
+    e.target.reset();
   };
 };
 
