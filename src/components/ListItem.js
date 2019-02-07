@@ -15,7 +15,9 @@ const ListItem = ({title, id, authors, thumbnail, infoLink, publisher}) => {
   */
 
   const separateAuthors = (arr) => {
+    //destructure the reversed array, putting the first entries at the end since es6 doesn't allow destructuring in the beginning
     const [beginning, ...end] = arr.reverse();
+    //join the end of the reversed array (the beginning of the original) with commas, and drop ', and ' before the last
     return end.join(', ') + ', and ' + beginning
   }
   const authorCheck = authors ? authors.length > 1 ? (separateAuthors((authors))) : (<span>{authors[0]}</span>) : (<span>Author Unavailable</span>)
