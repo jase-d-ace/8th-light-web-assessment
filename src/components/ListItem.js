@@ -13,13 +13,18 @@ const ListItem = ({title, id, authors, thumbnail, infoLink, publisher}) => {
    * Then it checks to see if there is more than one author listed.
    * If there is, map over and separate by comma. If not, just return the first (and only) author.
   */
-  const authorCheck = authors ? authors.length > 1 ? (authors.map((author, i) => <span key={i}>{author}, </span>)) : (<span>{authors[0]}</span>) : (<span>Author Unavailable</span>)
+
+  const separateAuthors = (arr) => {
+    const [beginning, ...end] = arr.reverse();
+    return end.join(', ') + ', and ' + beginning
+  }
+  const authorCheck = authors ? authors.length > 1 ? (separateAuthors((authors))) : (<span>{authors[0]}</span>) : (<span>Author Unavailable</span>)
 
   return(
     <li className="book-item">
-      <img src={thumbnail ? thumbnail : "https://via.placeholder.com/150"} alt="book" />
+    {thumbnail ? (<img src={thumbnail}alt="book" />) : <div className="placeholder"><span className="placeholder-text">No Image Available</span></div>}
       <p>{title}, by {authorCheck}</p> 
-      <p>Publisher: {publisher}</p>
+      <p>Publisher: {publisher ? publisher : "Publisher Unavailable"}</p>
       <p>More Info: <a target="_blank" rel="noopener noreferrer" href={infoLink}>Click Here</a></p>
     </li>
   )
