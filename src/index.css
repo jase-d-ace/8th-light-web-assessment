@@ -62,3 +62,16 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  width: 150px;
+}
+
+.placeholder-text {
+  position: relative;
+  top: 50%;
+  left: 10%;
+}
