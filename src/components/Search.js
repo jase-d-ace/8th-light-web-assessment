@@ -41,7 +41,7 @@ Search.propTypes = {
   promiseResolved: PropTypes.bool,
   err: PropTypes.object,
   queryResult: PropTypes.arrayOf(PropTypes.shape({
-    etag: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     authors: PropTypes.arrayOf(PropTypes.string),
     image: PropTypes.string,
     publisher: PropTypes.string,

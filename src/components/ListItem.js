@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListItem = ({title, id, etag, authors, thumbnail, infoLink, publisher}) => {
+const ListItem = ({title, id, authors, thumbnail, infoLink, publisher}) => {
 
   /*
    * The google API returns authors as an array
@@ -17,7 +17,7 @@ const ListItem = ({title, id, etag, authors, thumbnail, infoLink, publisher}) =>
 
   return(
     <li className="book-item">
-      <img src={thumbnail} alt="book" />
+      <img src={thumbnail ? thumbnail : "https://via.placeholder.com/150"} alt="book" />
       <p>{title}, by {authorCheck}</p> 
       <p>Publisher: {publisher}</p>
       <p>More Info: <a target="_blank" rel="noopener noreferrer" href={infoLink}>Click Here</a></p>
@@ -27,7 +27,7 @@ const ListItem = ({title, id, etag, authors, thumbnail, infoLink, publisher}) =>
 
 
 ListItem.propTypes = {
-  etag: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   authors: PropTypes.arrayOf(PropTypes.string),
   thumbnail: PropTypes.string,
   publisher: PropTypes.string,
