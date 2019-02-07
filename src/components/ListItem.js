@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListItem = ({title, etag, authors, thumbnail, infoLink, publisher}) => {
+const ListItem = ({title, id, etag, authors, thumbnail, infoLink, publisher}) => {
 
   /*
    * The google API returns authors as an array
@@ -13,10 +13,10 @@ const ListItem = ({title, etag, authors, thumbnail, infoLink, publisher}) => {
    * Then it checks to see if there is more than one author listed.
    * If there is, map over and separate by comma. If not, just return the first (and only) author.
   */
-  const authorCheck = authors ? authors.length > 1 ? (authors.map(author => <span>{author}, </span>)) : (<span>{authors[0]}</span>) : (<span>Author Unavailable</span>)
+  const authorCheck = authors ? authors.length > 1 ? (authors.map((author, i) => <span key={i}>{author}, </span>)) : (<span>{authors[0]}</span>) : (<span>Author Unavailable</span>)
 
   return(
-    <li className="book-item" key={etag}>
+    <li className="book-item">
       <img src={thumbnail} alt="book" />
       <p>{title}, by {authorCheck}</p> 
       <p>Publisher: {publisher}</p>

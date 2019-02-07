@@ -48,9 +48,10 @@ export const makeSearch = () => (dispatch, getState) => {
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=10`)
   .then(res => res.json())
   .then(({ items }) => {
+    let identifier = 0;
     const cleanData = items.map(({ volumeInfo, etag }) => {
       const { title, authors, publisher, infoLink, imageLinks: { thumbnail } } = volumeInfo;
-      return { title, authors, publisher, infoLink, thumbnail, etag }
+      return { id: identifier++, title, authors, publisher, infoLink, thumbnail, etag }
     });
     //dispatch the query resolution action with the filtered array of objects
     dispatch(queryResolution(cleanData, getState().search.searchQuery));
