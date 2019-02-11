@@ -1,6 +1,7 @@
 import React from 'react';
 import ListItem from './ListItem';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { pageUp, pageDown } from '../actions';
 
 const List = ({ queryResult, offset, pageUp, pageDown }) => {
@@ -20,6 +21,20 @@ const List = ({ queryResult, offset, pageUp, pageDown }) => {
 
 const mapStateToProps = state => ({
   offset: state.search.offset
-})
+});
+
+List.propTypes = {
+  pageUp: PropTypes.func.isRequired,
+  pageDown: PropTypes.func.isRequired,
+  queryResult: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string),
+    image: PropTypes.string,
+    publisher: PropTypes.string,
+    title: PropTypes.string,
+    info: PropTypes.string
+  })),
+  offset: PropTypes.number.isRequired
+}
 
 export default connect(mapStateToProps, { pageUp, pageDown })(List)
