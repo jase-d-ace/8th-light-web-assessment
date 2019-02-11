@@ -50,7 +50,7 @@ export const buildQuery = query => (dispatch, getState) => {
 export const makeSearch = () => (dispatch, getState) => {
   //send the fetch request to the google api
   dispatch(queryLoading())
-  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=10`)
+  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=40`)
   .then(res => res.json())
   .then(({ items }) => {
     let identifier = 0;
