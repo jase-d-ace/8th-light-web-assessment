@@ -10,12 +10,12 @@ import Error from './Error';
  * This component is the main brain of the app.
  * It takes the necessary bits of state and sets up the logic of the entire thing.
  * The props makeSearch and buildQuery are the action dispatchers that we defined in our actions file
- * promiseResolved, previousQuery, err, and queryResult are used in presentational logic.
+ * promiseResolved, previousQuery, err, queryLoading, and queryResult are used in presentational logic.
  * the services file that we import is meant for more code splitting, allowing us to clean up just a little bit more
  * Basically we pass our action dispatchers as callback functions to the methods in the services file, which then do the work for us
 */
 
-const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, previousQuery }) => (
+const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, previousQuery, queryLoading }) => (
   <div className="search-container">
     {previousQuery ? (<h2>You searched for {previousQuery}</h2>) : (<h2>Please Make a Search</h2>)}
     <form onSubmit={(e) => services.submit(e, makeSearch)} className="search-header">
@@ -23,7 +23,7 @@ const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, pre
       <input type="submit" value="Search" />
     </form>
     <div className="results-container">
-      {promiseResolved && !err ? <List queryResult={queryResult} /> : err ? <Error err={err} /> : ''}
+    {queryLoading ? (<h1>Loading Results...</h1>) : promiseResolved && !err ? <List queryResult={queryResult} /> : err ? <Error err={err} /> : ''}
     </div>
   </div>
 );
@@ -32,7 +32,8 @@ const mapStateToProps = (state) => ({
   queryResult: state.search.queryResult,
   promiseResolved: state.search.promiseResolved,
   err: state.search.err,
-  previousQuery: state.search.previousQuery
+  previousQuery: state.search.previousQuery,
+  queryLoading: state.search.queryLoading
 })
 
 Search.propTypes = {
