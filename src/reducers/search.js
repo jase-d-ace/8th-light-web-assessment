@@ -33,7 +33,8 @@ export const search = (state = initialState, action) => {
       return {
         ...state,
         err: action.err,
-        previousQuery: action.prev
+        previousQuery: action.prev,
+        queryLoading: false
       }
     case QUERY_LOADING: 
       return {
