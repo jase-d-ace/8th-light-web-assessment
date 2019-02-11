@@ -22,3 +22,17 @@ It was a really nice surprise that the Google Books API didn't require an API ke
 While I did do SOME styling for the app, I feel like I can do more. I also think that even though the app does exactly as the challenge requires, I think I can expand on it a little more. I wasn't sure how many books I should be returning from the API, so I picked a nice, round 10.
 
 I also think there's some way of programmatically dealing with books with multiple authors that doesn't involve using a `for loop` and brute-forcing the formatting of multiple authors.
+
+## Running Tests
+Run the tests using `npm test`.
+
+
+## Post-Feedback Changes
+
+* There is now a pagination feature to expand the number of possible results without flooding the page
+* The list of results is now in a scrollable container
+* The document title now is appropriately changed
+* Multiple authors are now no longer followed by a trailing comma
+* Files now have appropriate permissions
+* Error messages are now tailored to the error
+* Search results that lack a picture no longer break the app and force an error
