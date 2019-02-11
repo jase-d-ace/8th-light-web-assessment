@@ -20,6 +20,10 @@ const queryRejection = (err, prev) => ({
   prev
 });
 
+const queryLoading = () => ({
+  type: types.QUERY_LOADING
+})
+
 /* Dispatchers and Business Logic */
 
 /*
@@ -45,21 +49,29 @@ export const buildQuery = query => (dispatch, getState) => {
 
 export const makeSearch = () => (dispatch, getState) => {
   //send the fetch request to the google api
-  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=10`)
+  dispatch(queryLoading())
+  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=40`)
   .then(res => res.json())
   .then(({ items }) => {
-    let identifier = 0;
-    const cleanData = items.map(({ volumeInfo }) => {
-      const { title, authors, publisher, infoLink, ...rest } = volumeInfo;
-      if (rest.imageLinks) {
-        const { thumbnail } = rest.imageLinks;
-        return { id: identifier++, title, authors, publisher, infoLink, thumbnail }
-      } else {
-        return { id: identifier++, title, authors, publisher, infoLink }
-      }
+    if (items) {
+      let identifier = 0;
+      const cleanData = items.map(({ volumeInfo }) => {
+        const { title, authors, publisher, infoLink, ...rest } = volumeInfo;
+        if (rest.imageLinks) {
+          const { thumbnail } = rest.imageLinks;
+          return { id: identifier++, title, authors, publisher, infoLink, thumbnail }
+        } else {
+          return { id: identifier++, title, authors, publisher, infoLink }
+       }
     });
     //dispatch the query resolution action with the filtered array of objects
     dispatch(queryResolution(cleanData, getState().search.searchQuery));
+
+    /* Uncomment this line and comment the line above to test api errors */
+    // dispatch(queryRejection(new Error('some error'), getState().search.searchQuery));
+    } else {
+      dispatch(queryRejection(new Error('Your search returned no results'), getState().search.searchQuery))
+    }
   })
   .catch(err => {
     //if the request is rejected, set state to the error
