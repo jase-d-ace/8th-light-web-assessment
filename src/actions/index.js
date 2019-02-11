@@ -49,6 +49,17 @@ export const buildQuery = query => (dispatch, getState) => {
   debouncedBuildQuery(query, dispatch)
 }
 
+/*
+ * The next two dispatchers are the pagination functions
+ * They take the current offset and then modify it,
+ * then make the API request using the new startIndex,
+ * and then finally change the state to reflect the new offset
+ * solution to calling other dispatchers found here:
+ * https://stackoverflow.com/questions/48067180/redux-calling-one-action-from-another-action-creator
+*/
+
+
+
 export const pageUp = () => (dispatch, getState) => {
   const offset = getState().search.offset + 1
   dispatch(makeSearch(offset))
@@ -65,13 +76,6 @@ export const pageDown = () => (dispatch, getState) => {
  * This dispatcher makes a fetch request to the google books API for the title that the user searched for
  * Once the request is made, it is then resolved and the incoming data is cleaned and then sent to the front end
  * Or it is rejected and the error is sent to the front end.
-*/
-
-/* TODO 
- * Write a "paginated" function that will make another request for the next 40 results
- * If results of that call are less than 40, then don't render the button to make the call again
- * Keep the offset in state so that you can go back and forth
- * Logic will have to be something like... (offset * 40) for going forwards
 */
 
 export const makeSearch = (offset = 0) => (dispatch, getState) => {
