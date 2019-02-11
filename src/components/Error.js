@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 const errorCheck = err => {
   switch(err.message) {
     case "Your search returned no results":
-      return <h2>Your search returned no results</h2>
+      return "Your search returned no results"
+    case "The API took too long to respond":
+      return "Network issues are slowing your search"
     default:
-      return (
-      <div className="error">
-        <p>To make everything better, here's a random stock photo.</p>
-        <img src="https://picsum.photos/200" alt="error" />
-      </div>
-    )
+      return "There was an error in your search"
   }
 }
 
-const Error = ({ err }) => errorCheck(err)
+const Error = ({ err }) => (
+  <div className="error">
+    <h2>{errorCheck(err)}</h2>
+    <p>To make everything better, here's a random stock photo.</p>
+    <img src="https://picsum.photos/200" alt="error" />
+  </div>
+) 
 
 Error.propTypes = {
   err: PropTypes.shape({
