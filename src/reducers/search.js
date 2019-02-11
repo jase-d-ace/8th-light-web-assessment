@@ -1,12 +1,14 @@
 import { SEARCH_QUERY,
          QUERY_RESOLVED,
-         QUERY_REJECTED 
+         QUERY_REJECTED,
+         QUERY_LOADING
        } from '../constants/types';
 
 const initialState = {
   searchQuery: null,
   queryResult: null,
   promiseResolved: false,
+  queryLoading: false,
   err: null,
   previousQuery: null
 };
@@ -21,6 +23,7 @@ export const search = (state = initialState, action) => {
     case QUERY_RESOLVED:
       return {
         err: null,
+        queryLoading: false,
         queryResult: action.query,
         promiseResolved: true,
         previousQuery: action.prev,
@@ -31,6 +34,11 @@ export const search = (state = initialState, action) => {
         ...state,
         err: action.err,
         previousQuery: action.prev
+      }
+    case QUERY_LOADING: 
+      return {
+        ...state,
+        queryLoading: true
       }
     default:
       return state
