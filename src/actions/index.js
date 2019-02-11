@@ -47,11 +47,21 @@ export const buildQuery = query => (dispatch, getState) => {
  * Or it is rejected and the error is sent to the front end.
 */
 
+/* TODO 
+ * Write a "paginated" function that will make another request for the next 40 results
+ * If results of that call are less than 40, then don't render the button to make the call again
+*/
+
 export const makeSearch = () => (dispatch, getState) => {
   //send the fetch request to the google api
   dispatch(queryLoading())
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=40`)
-  .then(res => res.json())
+  .then(res => new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject("The API took too long to respond")
+    }, 3000)
+    resolve(res.json())
+  }))
   .then(({ items }) => {
     if (items) {
       let identifier = 0;
