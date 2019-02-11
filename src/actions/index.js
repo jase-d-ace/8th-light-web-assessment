@@ -24,6 +24,14 @@ const queryLoading = () => ({
   type: types.QUERY_LOADING
 })
 
+const offsetUp = () => ({
+  type: types.OFFSET_UP
+})
+
+const offsetDown = () => ({
+  type: types.OFFSET_DOWN
+})
+
 /* Dispatchers and Business Logic */
 
 /*
@@ -41,6 +49,18 @@ export const buildQuery = query => (dispatch, getState) => {
   debouncedBuildQuery(query, dispatch)
 }
 
+export const pageUp = () => (dispatch, getState) => {
+  const offset = getState().search.offset + 1
+  dispatch(makeSearch(offset))
+  dispatch(offsetUp())
+};
+
+export const pageDown = () => (dispatch, getState) => {
+  const offset = getState().search.offset - 1
+  dispatch(makeSearch(offset))
+  dispatch(offsetDown())
+}
+
 /*
  * This dispatcher makes a fetch request to the google books API for the title that the user searched for
  * Once the request is made, it is then resolved and the incoming data is cleaned and then sent to the front end
@@ -50,12 +70,14 @@ export const buildQuery = query => (dispatch, getState) => {
 /* TODO 
  * Write a "paginated" function that will make another request for the next 40 results
  * If results of that call are less than 40, then don't render the button to make the call again
+ * Keep the offset in state so that you can go back and forth
+ * Logic will have to be something like... (offset * 40) for going forwards
 */
 
-export const makeSearch = () => (dispatch, getState) => {
+export const makeSearch = (offset = 0) => (dispatch, getState) => {
   //send the fetch request to the google api
   dispatch(queryLoading())
-  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=40`)
+  fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&startIndex=${40*offset}&maxResults=40`)
   .then(res => new Promise((resolve, reject) => {
     setTimeout(() => {
       reject("The API took too long to respond")
