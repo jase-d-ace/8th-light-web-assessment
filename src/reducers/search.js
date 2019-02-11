@@ -1,7 +1,9 @@
 import { SEARCH_QUERY,
          QUERY_RESOLVED,
          QUERY_REJECTED,
-         QUERY_LOADING
+         QUERY_LOADING,
+         OFFSET_UP,
+         OFFSET_DOWN
        } from '../constants/types';
 
 const initialState = {
@@ -10,7 +12,8 @@ const initialState = {
   promiseResolved: false,
   queryLoading: false,
   err: null,
-  previousQuery: null
+  previousQuery: null,
+  offset: 0
 };
 
 export const search = (state = initialState, action) => {
@@ -22,12 +25,12 @@ export const search = (state = initialState, action) => {
       }
     case QUERY_RESOLVED:
       return {
+        ...state,
         err: null,
         queryLoading: false,
         queryResult: action.query,
         promiseResolved: true,
-        previousQuery: action.prev,
-        searchQuery: null
+        previousQuery: action.prev
       }
     case QUERY_REJECTED:
       return {
@@ -40,6 +43,16 @@ export const search = (state = initialState, action) => {
       return {
         ...state,
         queryLoading: true
+      }
+    case OFFSET_UP:
+      return {
+        ...state,
+        offset: state.offset + 1
+      }
+    case OFFSET_DOWN:
+      return {
+        ...state,
+        offset: state.offset - 1
       }
     default:
       return state
