@@ -20,6 +20,10 @@ const queryRejection = (err, prev) => ({
   prev
 });
 
+const queryLoading = () => ({
+  type: types.QUERY_LOADING
+})
+
 /* Dispatchers and Business Logic */
 
 /*
@@ -45,6 +49,7 @@ export const buildQuery = query => (dispatch, getState) => {
 
 export const makeSearch = () => (dispatch, getState) => {
   //send the fetch request to the google api
+  dispatch(queryLoading())
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&maxResults=10`)
   .then(res => res.json())
   .then(({ items }) => {
