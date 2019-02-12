@@ -39,7 +39,7 @@ While I did do SOME styling for the app, I feel like I can do more. I also think
 ## Running Tests
 I was only successfully able to create a test suite for my reducers. I wasn't exactly sure how to write tests for my actions or my components, which may mean that I have room to improve the logic or the flow of those files.
 
-> EDIT 02/13/2019: I've added a couple of rudimentary tests for one of my components
+> EDIT 02/12/2019: I've added a couple of rudimentary tests for one of my components
 
 Run the tests using `npm test`.
 
