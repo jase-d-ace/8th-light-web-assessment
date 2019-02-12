@@ -23,6 +23,9 @@ Basically, my thought process was to first do as much set up as possible at firs
 
 It was a really nice surprise that the Google Books API didn't require an API key, which allowed me to write strictly front end code without the use of a server. This allowed me to deploy using [surge.sh](https://surge.sh) for faster deployment with less setup.
 
+## Deployed App
+The app can be found at https://8th-light-challenge.surge.sh
+
 ## Next Steps (02/01/2019)
 
 While I did do SOME styling for the app, I feel like I can do more. I also think that even though the app does exactly as the challenge requires, I think I can expand on it a little more.
