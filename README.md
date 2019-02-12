@@ -15,7 +15,9 @@ I used JavaScript as my language of choice for this challenge. Initially, I thou
 
 > EDIT 02/12/2019: Having finished going through the feedback, I realized that it was indeed necessary to add Redux to this app. Looking back, having Redux store all of my state instead of having to pass it around as props to components made my life so much easier. It also made writing components a little more efficient, since I was able to write purely functional components and was able to entirely avoid writing Class Components.
 
-> EDIT 02/12/2019: If I were to do this again, I don't think I'd do anything differently, assuming I still used Javascript as my language of choice. I'm pretty happy with my choices for which libraries I used, and I think that I used them to their full effects.
+> EDIT 02/12/2019: If I were to do this again, I don't think I'd do anything differently, assuming I still used Javascript as my language of choice. I'm pretty happy with my choices for which libraries I used, and I think that I used them to their full effects. 
+
+> EDIT 02/12/2019: If I had to change one thing, maybe I would implement some sort of authentication. There are a whole bunch of other features in the Google Books API that require an API key. This means that I'd need some way to hide that key, which is impossible when writing strictly front end code. That said, I'd need to incorporate a full server, which I would probably use Node.js for, and then implement OAuth functionality so that I can take full advantage of the API while being able to hide my key from public use.
 
 Basically, my thought process was to first do as much set up as possible at first; my goal was to ensure that all of the business logic checked out, and all of my actions, dispatchers, and reducers were good to go. I wanted to make sure that all of the heavy Redux work was done FIRST, and then I'd worry about presentational components. So I focused mainly on writing clean, modular Redux code for my dispatchers and reducers.
 
