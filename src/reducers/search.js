@@ -2,6 +2,7 @@ import { SEARCH_QUERY,
          QUERY_RESOLVED,
          QUERY_REJECTED,
          QUERY_LOADING,
+         RESET_OFFSET,
          OFFSET_UP,
          OFFSET_DOWN
        } from '../constants/types';
@@ -43,6 +44,11 @@ export const search = (state = initialState, action) => {
       return {
         ...state,
         queryLoading: true
+      }
+    case RESET_OFFSET:
+      return {
+        ...state,
+        offset: 0
       }
     case OFFSET_UP:
       return {

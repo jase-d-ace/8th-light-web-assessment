@@ -6,7 +6,10 @@ describe('reducers', () => {
       searchQuery: null,
       queryResult: null,
       promiseResolved: false,
-      err: null
+      queryLoading: false,
+      err: null,
+      previousQuery: null,
+      offset: 0
     };
 
     it('should describe the initial state', () => {
@@ -24,7 +27,16 @@ describe('reducers', () => {
         err: null,
         previousQuery: null
       };
-      expect(search(state, { type: 'QUERY_RESOLVED', query: [{foo: 'bar'}], prev: 'example'})).toEqual({...state, searchQuery: null, queryResult: [{foo: 'bar'}], previousQuery: 'example'})
+      expect(search(state, { type: 'QUERY_RESOLVED', query: [{foo: 'bar'}], prev: 'example'})).toEqual({...state, searchQuery: 'example', queryLoading: false, queryResult: [{foo: 'bar'}], previousQuery: 'example'})
+    })
+    it('should increment the offset value', () => {
+      expect(search(initialState, {type: 'OFFSET_UP'})).toEqual({...initialState, offset: 1})
+    })
+    it('should decrement the offset value', () => {
+      expect(search(initialState, {type: 'OFFSET_DOWN'})).toEqual({...initialState, offset: -1})
+    })
+    it('should throw an error if an error is passed', () => {
+      expect(search(initialState, {type: 'QUERY_REJECTED', err: {message: 'something went wrong', stack: '/path/to/file'}, prev: 'harry potter'})).toEqual({...initialState, previousQuery: 'harry potter', err: {message: 'something went wrong', stack: '/path/to/file'}})
     })
   })
 })
