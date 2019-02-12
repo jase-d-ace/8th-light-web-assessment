@@ -15,7 +15,9 @@ import Error from './Error';
  * Basically we pass our action dispatchers as callback functions to the methods in the services file, which then do the work for us
 */
 
-const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, previousQuery, queryLoading }) => (
+//exporting the function for testing purposes. Not actually used in anything but tests
+
+export const Search = ({ makeSearch, buildQuery, promiseResolved, err, queryResult, previousQuery, queryLoading }) => (
   <div className="search-container">
     {previousQuery ? (<h2>You searched for {previousQuery}</h2>) : (<h2>Please Make a Search</h2>)}
     <form onSubmit={(e) => services.submit(e, makeSearch)} className="search-header">
