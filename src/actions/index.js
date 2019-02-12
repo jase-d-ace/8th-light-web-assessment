@@ -32,6 +32,10 @@ const offsetDown = () => ({
   type: types.OFFSET_DOWN
 })
 
+const resetOffset = () => ({
+  type: types.RESET_OFFSET
+})
+
 /* Dispatchers and Business Logic */
 
 /*
@@ -58,8 +62,6 @@ export const buildQuery = query => (dispatch, getState) => {
  * https://stackoverflow.com/questions/48067180/redux-calling-one-action-from-another-action-creator
 */
 
-
-
 export const pageUp = () => (dispatch, getState) => {
   const offset = getState().search.offset + 1
   dispatch(makeSearch(offset))
@@ -79,8 +81,10 @@ export const pageDown = () => (dispatch, getState) => {
 */
 
 export const makeSearch = (offset = 0) => (dispatch, getState) => {
-  //send the fetch request to the google api
   dispatch(queryLoading())
+  if (offset === 0) {
+    dispatch(resetOffset())
+  }
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${getState().search.searchQuery}&startIndex=${40*offset}&maxResults=40`)
   .then(res => new Promise((resolve, reject) => {
     setTimeout(() => {
